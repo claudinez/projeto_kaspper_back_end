@@ -2,23 +2,43 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Cadastro de Serviço</title>
+    <!-- Adicionar a referência ao Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Cadastro de Serviço</h1>
-    <form th:action="@{/servicos/salvar}" th:object="${servico}" method="post">
-        <input type="hidden" th:field="*{id}"/>
-        <label>Descrição:</label>
-        <input type="text" th:field="*{descricao}" required/><br/>
-        <label>Linguagem:</label>
-        <input type="text" th:field="*{linguagem}" required/><br/>
-        <label>Status:</label>
-        <input type="text" th:field="*{status}" /><br/>
-        <label>Cliente:</label>
-        <select th:field="*{cliente.id}">
-            <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nome}"></option>
-        </select><br/>
-        <button type="submit">Salvar</button>
-        <a href="/servicos">Cancelar</a>
-    </form>
+    <div class="container mt-5">
+        <h1 class="mb-4">Cadastro de Serviço</h1>
+        <form th:action="@{/servicos/salvar}" th:object="${servico}" method="post">
+            <input type="hidden" th:field="*{id}"/>
+
+            <div class="mb-3">
+                <label for="descricao" class="form-label">Descrição:</label>
+                <input type="text" id="descricao" class="form-control" th:field="*{descricao}" required />
+            </div>
+
+            <div class="mb-3">
+                <label for="linguagem" class="form-label">Linguagem:</label>
+                <input type="text" id="linguagem" class="form-control" th:field="*{linguagem}" required />
+            </div>
+
+            <div class="mb-3">
+                <label for="status" class="form-label">Status:</label>
+                <input type="text" id="status" class="form-control" th:field="*{status}" />
+            </div>
+
+            <div class="mb-3">
+                <label for="cliente" class="form-label">Cliente:</label>
+                <select id="cliente" class="form-select" th:field="*{cliente.id}">
+                    <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nome}"></option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a href="/servicos" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+
+    <!-- Adicionar o script do Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
