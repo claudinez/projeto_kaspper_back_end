@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Cliente</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Cadastro de Cliente</h1>
+    <form th:action="@{/clientes/salvar}" th:object="${cliente}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        
+        <div class="mb-3 row">
+            <label for="nome" class="col-sm-2 col-form-label">Nome:</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="nome" th:field="*{nome}" maxlength="50" placeholder="Insira nome" />
+            </div>
+        </div>
+        
+        <div class="mb-3 row">
+            <label for="sobrenomenome" class="col-sm-2 col-form-label">Sobrenome:</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="sobrenome" th:field="*{sobrenome}" maxlength="50" placeholder="Insira sobrenome" />
+            </div>
+        </div>
+        
+
+        <div class="mb-3 row">
+            <label for="email" class="col-sm-2 col-form-label">Email:</label>
+            <div class="col-sm-6">
+                <input type="email" class="form-control" id="email" th:field="*{email}" maxlength="150" placeholder="exemplo@dominio.com" />
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="telefone" class="col-sm-2 col-form-label">Telefone:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="telefone" th:field="*{telefone}" maxlength="15" placeholder="(99) 99999-9999" />
+            </div>
+        </div>
+        
+        <div class="mb-3 row">
+            <label for="cargo" class="col-sm-2 col-form-label">Cargo:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="cargo" th:field="*{cargo}" maxlength="15" placeholder="insira cargo" />
+            </div>
+        </div>
+        
+        <div class="mb-3 row">
+           <label for="status" class="col-sm-2 col-form-label">Status:</label>
+         <div class="col-sm-4">
+           <select class="form-control" id="status" th:field="*{status}">
+              <option value="urgente">Urgente</option>
+              <option value="7_dias">Nos próximos 7 dias</option>
+              <option value="15_dias">Nos próximos 15 dias</option>
+              <option value="30_dias">Nos próximos 30 dias</option>
+              <option value="sem_data">Não tenho data definida</option>
+           </select>
+          </div>
+         </div> 
+        
+         <div class="mb-3 row">
+           <label for="dataCriacao" class="col-sm-2 col-form-label">Data Criação:</label>
+          <div class="col-sm-4">
+            <input 
+            type="text" 
+            class="form-control" 
+            id="dataCriacao" 
+            th:field="*{dataCriacao}" 
+            readonly 
+            placeholder="Data será preenchida automaticamente" 
+            th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}" />
+         </div>
+       </div>
+
+        <div class="d-flex justify-content-start gap-3">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a href="/clientes" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
