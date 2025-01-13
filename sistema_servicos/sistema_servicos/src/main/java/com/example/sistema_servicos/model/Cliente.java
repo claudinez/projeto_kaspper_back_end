@@ -1,12 +1,12 @@
 package com.example.sistema_servicos.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
@@ -29,14 +29,14 @@ public class Cliente {
     @Column(length = 15)
     private String telefone;
     
-    @Column(nullable = false, unique = true, length = 50)
+    @Column(nullable = false, length = 30)
     private String cargo;
     
-    @Column(nullable = false, unique = true, length = 50)
+    @Column(nullable = false, length = 50)
     private String status;
 
     @Column(name = "data_criacao", nullable = false, updatable = false)
-    private LocalDate dataCriacao;
+    private LocalDateTime dataCriacao;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -44,7 +44,7 @@ public class Cliente {
 
     @PrePersist
     protected void onCreate() {
-        this.dataCriacao = LocalDate.now();  // Usando LocalDate para armazenar apenas a data
+        this.dataCriacao = LocalDateTime.now();
     }
 
     // Getters e Setters
@@ -65,13 +65,13 @@ public class Cliente {
     }
     
     public String getSobrenome() {
-        return sobrenome;
+        return nome;
     }
-    
+
     public void setSobrenome(String sobrenome) {
         this.sobrenome = sobrenome;
     }
-    
+
     public String getEmail() {
         return email;
     }
@@ -91,27 +91,23 @@ public class Cliente {
     public String getCargo() {
         return cargo;
     }
-    
+
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
     
     public String getStatus() {
-        return status;
+        return cargo;
     }
-    
+
     public void setStatus(String status) {
         this.status = status;
     }
-     
-    public LocalDate getDataCriacao() {
+    
+    public LocalDateTime getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(LocalDate dataCriacao) {
-        this.dataCriacao = dataCriacao;
-    }
-    
     public List<Servico> getServicos() {
         return servicos;
     }

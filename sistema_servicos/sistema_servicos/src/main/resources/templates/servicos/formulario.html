@@ -2,43 +2,81 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Cadastro de Serviço</title>
-    <!-- Adicionar a referência ao Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">Cadastro de Serviço</h1>
         <form th:action="@{/servicos/salvar}" th:object="${servico}" method="post">
-            <input type="hidden" th:field="*{id}"/>
+            <input type="hidden" th:field="*{id}" />
 
+            <!-- Campo oculto para associar o cliente -->
+            <input type="hidden" th:field="*{cliente.id}" th:value="${cliente != null ? cliente.id : ''}" />
+
+            <!-- Descrição -->
             <div class="mb-3">
                 <label for="descricao" class="form-label">Descrição:</label>
                 <input type="text" id="descricao" class="form-control" th:field="*{descricao}" required />
             </div>
 
+            <!-- Linguagem -->
             <div class="mb-3">
                 <label for="linguagem" class="form-label">Linguagem:</label>
                 <input type="text" id="linguagem" class="form-control" th:field="*{linguagem}" required />
             </div>
 
+            <!-- Status -->
             <div class="mb-3">
                 <label for="status" class="form-label">Status:</label>
-                <input type="text" id="status" class="form-control" th:field="*{status}" />
-            </div>
-
-            <div class="mb-3">
-                <label for="cliente" class="form-label">Cliente:</label>
-                <select id="cliente" class="form-select" th:field="*{cliente.id}">
-                    <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nome}"></option>
+                <select id="status" class="form-select" th:field="*{status}">
+                    <option value="Em Análise" th:selected="*{status == 'Em Análise'}">Em Análise</option>
+                    <option value="Urgente" th:selected="*{status == 'Urgente'}">Urgente</option>
+                    <option value="Aprovado" th:selected="*{status == 'Aprovado'}">Aprovado</option>
+                    <option value="Concluído" th:selected="*{status == 'Concluído'}">Concluído</option>
+                    <option value="Cancelado" th:selected="*{status == 'Cancelado'}">Cancelado</option>
                 </select>
             </div>
 
+            <!-- Campos de código e nome do cliente -->
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label for="clienteId" class="form-label">Código do Cliente:</label>
+                    <input type="text" id="clienteId" class="form-control" th:value="${cliente != null ? cliente.id : ''}" disabled />
+                </div>
+                <div class="col-md-9">
+                    <label for="clienteNome" class="form-label">Nome do Cliente:</label>
+                    <input type="text" id="clienteNome" class="form-control" th:value="${cliente != null ? cliente.nome : ''}" disabled />
+                </div>
+            </div>
+
+            <!-- Data de Solicitação -->
+            <div class="mb-3">
+                <label for="dataSolicitacao" class="form-label">Data de Solicitação:</label>
+                <input type="text" id="dataSolicitacao" class="form-control" th:field="*{dataSolicitacao}" readonly />
+            </div>
+
+            <!-- Botões -->
             <button type="submit" class="btn btn-primary">Salvar</button>
             <a href="/servicos" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
 
-    <!-- Adicionar o script do Bootstrap -->
+    <script>
+        // Script para preencher o campo de data de solicitação com a data atual no formato DD/MM/YYYY
+        document.addEventListener('DOMContentLoaded', function () {
+            const dataSolicitacaoInput = document.getElementById('dataSolicitacao');
+            const now = new Date();
+
+            // Formatar a data no padrão brasileiro DD/MM/YYYY
+            const dia = String(now.getDate()).padStart(2, '0');
+            const mes = String(now.getMonth() + 1).padStart(2, '0'); // Mês começa em 0
+            const ano = now.getFullYear();
+
+            const dataFormatada = `${dia}/${mes}/${ano}`;
+            dataSolicitacaoInput.value = dataFormatada;
+        });
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

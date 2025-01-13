@@ -1,8 +1,8 @@
 package com.example.sistema_servicos.model;
 
 import jakarta.persistence.*;
-import jakarta.persistence.GeneratedValue;
 import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
