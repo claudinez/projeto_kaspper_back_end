@@ -37,23 +37,25 @@
                 </select>
             </div>
 
-            <!-- Campos de código e nome do cliente -->
-            <div class="row mb-3">
-                <div class="col-md-3">
-                    <label for="clienteId" class="form-label">Código do Cliente:</label>
-                    <input type="text" id="clienteId" class="form-control" th:value="${cliente != null ? cliente.id : ''}" disabled />
-                </div>
-                <div class="col-md-9">
-                    <label for="clienteNome" class="form-label">Nome do Cliente:</label>
-                    <input type="text" id="clienteNome" class="form-control" th:value="${cliente != null ? cliente.nome : ''}" disabled />
-                </div>
+             <!-- Linha única para Código do Cliente, Nome do Cliente e Data de Solicitação -->
+			<div class="row mb-3">
+   			    <!-- Código do Cliente -->
+   			  <div class="col-md-2">
+       			 <label for="clienteId" class="form-label">Código do Cliente:</label>
+       			 <input type="text" id="clienteId" class="form-control" th:value="${cliente != null ? cliente.id : ''}" disabled />
+   			  </div>
+   			   <!-- Nome do Cliente -->
+    		   <div class="col-md-6">
+      		    <label for="clienteNome" class="form-label">Nome do Cliente:</label>
+       		    <input type="text" id="clienteNome" class="form-control" th:value="${cliente != null ? cliente.nome : ''}" disabled />
+   			   </div>
+    		   <!-- Data de Solicitação -->
+    		   <div class="col-md-4">
+     		     <label for="dataSolicitacao" class="form-label">Data de Solicitação:</label>
+     		     <input type="text" id="dataSolicitacao" class="form-control" th:field="*{dataSolicitacao}" readonly />
+               </div>
             </div>
-
-            <!-- Data de Solicitação -->
-            <div class="mb-3">
-                <label for="dataSolicitacao" class="form-label">Data de Solicitação:</label>
-                <input type="text" id="dataSolicitacao" class="form-control" th:field="*{dataSolicitacao}" readonly />
-            </div>
+            
 
             <!-- Botões -->
             <button type="submit" class="btn btn-primary">Salvar</button>
