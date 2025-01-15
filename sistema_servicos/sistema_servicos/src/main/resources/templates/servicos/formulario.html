@@ -15,14 +15,14 @@
 
             <!-- Descrição -->
             <div class="mb-3">
-                <label for="descricao" class="form-label">Descrição:</label>
-                <input type="text" id="descricao" class="form-control" th:field="*{descricao}" required />
+                <label for="descricao" class="form-label"> Descreva tipo de serviço:</label>
+                <input type="text" id="descricao" class="form-control" th:field="*{descricao}" placeholder="Ex.: Desenvolvimento Web, Mobile, Desktop" required />
             </div>
 
             <!-- Linguagem -->
             <div class="mb-3">
-                <label for="linguagem" class="form-label">Linguagem:</label>
-                <input type="text" id="linguagem" class="form-control" th:field="*{linguagem}" required />
+                <label for="linguagem" class="form-label">Linguagem e Banco de Dados:</label>
+                <input type="text" id="linguagem" class="form-control" th:field="*{linguagem}" placeholder="Ex.: Java, Angular, Mysql, Postgres" required />
             </div>
 
             <!-- Status -->

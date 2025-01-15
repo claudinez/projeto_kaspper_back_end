@@ -1,6 +1,7 @@
 package com.example.sistema_servicos.model;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -82,4 +83,5 @@ public class Servico {
     public LocalDateTime getDataSolicitacao() {
         return dataSolicitacao;
     }
+    
 }
