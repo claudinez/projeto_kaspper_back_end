@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="mb-4">Serviços</h1>
+        <h1 class="mb-4">Lançamento Valores de Serviços</h1>
         
        
         <table class="table table-striped">
@@ -16,6 +16,10 @@
                     <th>ID</th>
                     <th>Descrição</th>
                     <th>Linguagem</th>
+                    <th>Valor hora</th>
+                    <th>Dia Trabalhado</th>
+                    <th>Hora dia</th>
+                    <th>Valor</th>
                     <th>Status</th>
                     <th>Cliente</th>
                     <th>Ações</th>
@@ -27,6 +31,10 @@
                     <td th:text="${servico.id}"></td>
                     <td th:text="${servico.descricao}"></td>
                     <td th:text="${servico.linguagem}"></td>
+                    <td th:text="${servico.valorHora}"></td>
+                    <td th:text="${servico.diaTrabalhado}"></td>
+                    <td th:text="${servico.horaDia}"></td>
+                    <td th:text="${#numbers.formatDecimal(servico.valorTotalProjeto, 1, 2, 'COMMA')}"></td>
                     <td th:text="${servico.status}"></td>
                     <td th:text="${servico.cliente.nome}"></td>
                     <td>

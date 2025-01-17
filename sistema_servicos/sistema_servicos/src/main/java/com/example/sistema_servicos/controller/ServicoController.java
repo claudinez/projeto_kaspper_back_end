@@ -1,12 +1,21 @@
 package com.example.sistema_servicos.controller;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomNumberEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,10 +37,20 @@ public class ServicoController {
 
     @Autowired
     private ClienteRepository clienteRepository;
-
+    
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0.00", new DecimalFormatSymbols(Locale.US));
+        decimalFormat.setParseBigDecimal(true);
+        binder.registerCustomEditor(BigDecimal.class, new CustomNumberEditor(BigDecimal.class, decimalFormat, true));
+    }
+       
     @GetMapping
     public String listarServicos(Model model) {
+    	 // Obter todos os serviços
         model.addAttribute("servicos", servicoRepository.findAll());
+        
+     // Retorna a view (a página HTML que exibirá os dados)
         return "servicos/lista";
     }
 
@@ -45,12 +64,14 @@ public class ServicoController {
         model.addAttribute("servico", servico);
         return "servicos/formulario";
     }
+    
+    
+	    @PostMapping("/salvar")
+	    public String salvarServico(@ModelAttribute Servico servico) {
+	        servicoRepository.save(servico);
+	        return "redirect:/servicos";
+	    }
 
-    @PostMapping("/salvar")
-    public String salvarServico(@ModelAttribute Servico servico) {
-        servicoRepository.save(servico);
-        return "redirect:/servicos";
-    }
     
     @GetMapping("/editar/{id}")
     public String editarServico(@PathVariable("id") Long id, Model model) {
