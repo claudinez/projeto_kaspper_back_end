@@ -92,7 +92,21 @@ public class ServicoController {
             Servico servico = servicoOpt.get();
             model.addAttribute("servico", servico);
             model.addAttribute("cliente", servico.getCliente());  // Passando o cliente associado ao serviço
+            model.addAttribute("isEditing", true);  // Adiciona o atributo que indica que está em modo de edição
             return "servicos/formulario"; // Nome do template HTML de edição, certifique-se de que o arquivo editar-servico.html existe
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Serviço não encontrado");
+        }
+    }
+    
+    @GetMapping("/visualizar/{id}")
+    public String visualizarServico(@PathVariable("id") Long id, Model model) {
+        Optional<Servico> servicoOpt = servicoRepository.findById(id);
+        if (servicoOpt.isPresent()) {
+            Servico servico = servicoOpt.get();
+            model.addAttribute("servico", servico);
+            model.addAttribute("isEditing", false);  // Modo de visualização
+            return "servicos/formulario";  // Nome da página de visualização
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Serviço não encontrado");
         }
