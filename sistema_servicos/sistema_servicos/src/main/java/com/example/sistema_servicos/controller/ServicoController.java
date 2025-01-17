@@ -40,7 +40,7 @@ public class ServicoController {
     
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        DecimalFormat decimalFormat = new DecimalFormat("#,##0.00", new DecimalFormatSymbols(Locale.US));
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR")));
         decimalFormat.setParseBigDecimal(true);
         binder.registerCustomEditor(BigDecimal.class, new CustomNumberEditor(BigDecimal.class, decimalFormat, true));
     }
@@ -68,10 +68,22 @@ public class ServicoController {
     
 	    @PostMapping("/salvar")
 	    public String salvarServico(@ModelAttribute Servico servico) {
+	    	calcularEAtualizarValorTotal(servico); // Garante que o valor total seja atualizado corretamente
 	        servicoRepository.save(servico);
 	        return "redirect:/servicos";
 	    }
 
+	    private void calcularEAtualizarValorTotal(Servico servico) {
+	        if (servico.getValorHora() != null && servico.getDiaTrabalhado() > 0 && servico.getHoraDia() > 0) {
+	            BigDecimal valorTotal = servico.getValorHora()
+	                .multiply(BigDecimal.valueOf(servico.getDiaTrabalhado()))
+	                .multiply(BigDecimal.valueOf(servico.getHoraDia()));
+
+	            servico.setValorTotalProjeto(valorTotal);
+	        } else {
+	            servico.setValorTotalProjeto(BigDecimal.ZERO);
+	        }
+	    }
     
     @GetMapping("/editar/{id}")
     public String editarServico(@PathVariable("id") Long id, Model model) {

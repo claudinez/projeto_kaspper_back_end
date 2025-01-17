@@ -39,8 +39,7 @@ public class Servico {
     
     private Integer horaDia; // campo para calculo orcamento
     
-    @NotNull // Sem o atributo message
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "0.00")
+    @Column(precision = 10, scale = 2)
     private BigDecimal valorTotalProjeto;
     
     
@@ -122,11 +121,11 @@ public class Servico {
     }
     
 	 // Método para calcular o valor total do projeto
-	    public BigDecimal getValorTotalProjeto() {
+	 public BigDecimal getValorTotalProjeto() {
 	        return valorTotalProjeto;
 	    }
 	
-	    public void setValorTotalProjeto(BigDecimal valorTotalProjeto) {
+	 public void setValorTotalProjeto(BigDecimal valorTotalProjeto) {
 	    this.valorTotalProjeto = valorTotalProjeto;
 	}
 

@@ -49,7 +49,8 @@
 				    <!-- Valor Hora -->
 				    <div class="me-3">
 				        <label for="valorHora" class="form-label">Valor por Hora:</label>
-				        <input type="text" id="valorHora" name="valorHora" th:field="*{valorHora}" class="form-control" oninput="calcularValorTotal()" onchange="calcularValorTotal()" pattern="\d+(\.\d{1,2})?" title="Use o formato: 0.00" />
+				        <input type="text" id="valorHora" name="valorHora" th:field="*{valorHora}" class="form-control" 
+       					oninput="calcularValorTotal()" onchange="formatarValorHora()" pattern="\d+([.,]\d{1,2})?" title="Use o formato: 0.00" />
 				    </div>
 				
 				    <!-- Dias Trabalhados -->
