@@ -20,10 +20,10 @@
 			        <option value="" th:selected="*{descricao == null or descricao == ''}" disabled>Selecione uma opção</option>
 			        <option value="Criação de site (institucional/pessoal)">      </option>
 			        <option value="Criação de site (institucional/pessoal)">Criação de site (institucional/pessoal)</option>
-			        <option value="Desenvolvimento de sistema de gestão empresarial">Desenvolvimento de sistema de gestão empresarial</option>
-			        <option value="Desenvolvimento de sistema e-commerce">Desenvolvimento de sistema e-commerce</option>
-			        <option value="Atualização de conteúdo do site">Atualização de conteúdo do site</option>
-			        <option value="Atualização de conteúdo da estrutura">Atualização de conteúdo da estrutura</option>
+			        <option value="Desenvolvimento sistema gestão empresarial">Desenvolvimento sistema gestão empresarial</option>
+			        <option value="Desenvolvimento de sistema e-commerce">Desenvolvimento sistema e-commerce</option>
+			        <option value="Atualização de conteúdo do site">Atualização conteúdo do site</option>
+			        <option value="Atualização de conteúdo da estrutura">Atualização conteúdo da estrutura</option>
 			        <option value="Outro">Outro</option>
 			    </select>
 			</div>
@@ -52,8 +52,8 @@
 			
 			    <!-- Horas Dia -->
 			    <div class="me-3" id="horaDiaDiv" hidden>
-			        <label for="horaDia" class="form-label">Horas Dia:</label>
-			        <input type="number" id="horaDia" name="horaDia" class="form-control" th:field="*{horaDia}" oninput="calcularValorTotal()" onchange="calcularValorTotal()" />
+			        <label for="horaDia" class="form-label">Horas Dia:</label >
+			        <input type="number" id="horaDia" name="horaDia" class="form-control" th:field="*{horaDia}" oninput="calcularValorTotal()" onchange="calcularValorTotal()" size="5" />
 			    </div>
 			
 			    <!-- Valor Total Projeto -->
