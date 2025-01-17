@@ -13,30 +13,22 @@
             <!-- Campo oculto para associar o cliente -->
             <input type="hidden" th:field="*{cliente.id}" th:value="${cliente != null ? cliente.id : ''}" />
 
-           <!-- Tipo de Serviço -->
-		   <div class="mb-3">
-                <label for="descricao" class="form-label">Escolha o tipo de serviço:</label>
-                <select id="descricao" class="form-select" th:field="*{descricao}">
-                    <option value="" disabled selected>Selecione uma opção</option>
-                    <option value="Criação de site (institucional/pessoal)" th:selected="*{descricao == 'Criação de site (institucional/pessoal)'}">
-                        Criação de site (institucional/pessoal)
-                    </option>
-                    <option value="Desenvolvimento de sistema de gestão empresarial" th:selected="*{descricao == 'Desenvolvimento de sistema de gestão empresarial'}">
-                        Desenvolvimento de sistema de gestão empresarial
-                    </option>
-                    <option value="Desenvolvimento de sistema e-commerce" th:selected="*{descricao == 'Desenvolvimento de sistema e-commerce'}">
-                        Desenvolvimento de sistema e-commerce
-                    </option>
-                    <option value="Atualização de conteúdo do site" th:selected="*{descricao == 'Atualização de conteúdo do site'}">
-                        Atualização de conteúdo do site
-                    </option>
-                    <option value="Atualização de conteúdo da estrutura" th:selected="*{descricao == 'Atualização de conteúdo da estrutura'}">
-                        Atualização de conteúdo da estrutura
-                    </option>
-                    <option value="Outro" th:selected="*{descricao == 'Outro'}">Outro</option>
-                </select>
-		   </div>
-
+          <!-- Tipo de Serviço -->
+			<div class="mb-3">
+			    <label for="descricao" class="form-label">Escolha o tipo de serviço:</label>
+			    <select id="descricao" class="form-select" th:field="*{descricao}" required>
+			        <option value="" th:selected="*{descricao == null or descricao == ''}" disabled>Selecione uma opção</option>
+			        <option value="Criação de site (institucional/pessoal)">      </option>
+			        <option value="Criação de site (institucional/pessoal)">Criação de site (institucional/pessoal)</option>
+			        <option value="Desenvolvimento de sistema de gestão empresarial">Desenvolvimento de sistema de gestão empresarial</option>
+			        <option value="Desenvolvimento de sistema e-commerce">Desenvolvimento de sistema e-commerce</option>
+			        <option value="Atualização de conteúdo do site">Atualização de conteúdo do site</option>
+			        <option value="Atualização de conteúdo da estrutura">Atualização de conteúdo da estrutura</option>
+			        <option value="Outro">Outro</option>
+			    </select>
+			</div>
+			
+			
             <!-- Linguagem -->
             <div class="mb-3">
                 <label for="linguagem" class="form-label">Linguagem e Banco de Dados:</label>
