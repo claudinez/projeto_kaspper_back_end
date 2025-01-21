@@ -128,54 +128,10 @@ public class ServicoController {
         if (servicoOpt.isPresent()) {
             Servico servico = servicoOpt.get();
             servicoRepository.delete(servico); // Deletando o serviço
-            return "redirect:/servicos"; // Redireciona para a lista de serviços após a exclusão
+            return "redirect:/servicos/lista"; // Redireciona para a lista de serviços após a exclusão
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Serviço não encontrado");
         }   
     }
     
-    @PostMapping("/enviarRelatorio/{clienteId}")
-    public ResponseEntity<String> enviarRelatorio(@PathVariable Long clienteId) {
-        try {
-            Optional<Cliente> clienteOpt = clienteRepository.findById(clienteId);
-
-            if (clienteOpt.isPresent()) {
-                Cliente cliente = clienteOpt.get();
-                List<Servico> servicos = servicoRepository.findByClienteId(clienteId);
-
-                if (servicos.isEmpty()) {
-                    return ResponseEntity.status(404).body("Nenhum serviço encontrado para o cliente.");
-                }
-
-                StringBuilder tabelaHtml = new StringBuilder();
-                tabelaHtml.append("<h1>Relatório de Serviços</h1>")
-                        .append("<p>Olá ").append(cliente.getNome()).append(",</p>")
-                        .append("<p>Segue a lista de serviços associados a você:</p>")
-                        .append("<table border='1' style='border-collapse: collapse; width: 100%;'>")
-                        .append("<thead><tr><th>Descrição</th><th>Linguagem</th><th>Valor Total</th></tr></thead><tbody>");
-
-                for (Servico servico : servicos) {
-                    tabelaHtml.append("<tr>")
-                            .append("<td>").append(servico.getDescricao()).append("</td>")
-                            .append("<td>").append(servico.getLinguagem()).append("</td>")
-                            .append("<td>").append(String.format("R$ %.2f", servico.getValorTotalProjeto())).append("</td>")
-                            .append("</tr>");
-                }
-
-                tabelaHtml.append("</tbody></table>")
-                        .append("<p>Obrigado por utilizar nossos serviços!</p>");
-
-                // Enviar o e-mail HTML
-                emailService.enviarEmailHtml(cliente.getEmail(), "Relatório de Serviços", tabelaHtml.toString());
-
-                return ResponseEntity.ok("Relatório enviado com sucesso para " + cliente.getEmail());
-            } else {
-                return ResponseEntity.status(404).body("Cliente não encontrado.");
-            }
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(500).body("Erro ao enviar o e-mail: " + e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("Erro interno: " + e.getMessage());
-        }
-    }
-}
+   }
