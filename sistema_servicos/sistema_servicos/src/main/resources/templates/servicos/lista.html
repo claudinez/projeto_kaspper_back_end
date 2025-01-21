@@ -9,6 +9,11 @@
     <div class="container-fluid mt-5">
         <h1 class="mb-4 text-center">Lançamento Valores de Serviços</h1>
         
+        <!-- Botão para ir à lista de clientes -->
+	    <div class="mb-3 text-end">
+	        <a th:href="@{/clientes/lista}" class="btn btn-info">Lista de Clientes</a>
+	    </div>
+        
       <div class="table-responsive"> <!-- Faz a tabela rolar horizontalmente em telas pequenas --> 
         <table class="table table-bordered table-hover table-striped">
             <thead class="table-dark">
@@ -43,12 +48,50 @@
                         <a th:href="@{/servicos/deletar/{id}(id=${servico.id})}" class="btn btn-danger btn-sm" 
                            onclick="return confirm('Tem certeza que deseja excluir este serviço?')">Deletar</a>
                         <!-- Botão para Enviar E-mail -->
-   						<a th:href="@{/servicos/enviarEmail/{id}(id=${servico.id})}" class="btn btn-primary btn-sm">Enviar E-mail</a>
+   						 <form th:action="@{/email/enviar}" method="post" style="display:inline;">
+						    <input type="hidden" name="to" th:value="${servico.cliente.email}">
+						    <input type="hidden" name="subject" value="Informações sobre serviço">
+						    <input type="hidden" name="content" value="Detalhes do serviço">
+						    <button type="submit" class="btn btn-primary btn-sm">Enviar E-mail</button>
+						</form>
                     </td>
                 </tr>
             </tbody>
         </table>
         </div>
     </div>
+   <script>
+		document.addEventListener("DOMContentLoaded", function () {
+		    let statusCells = document.querySelectorAll("tbody td:nth-child(8)"); // 8ª coluna da tabela
+		
+		    statusCells.forEach(cell => {
+		        let statusText = cell.textContent.trim().toLowerCase();
+		
+		        switch (statusText) {
+		            case "em análise":
+		                cell.style.color = "#FFC107"; // Amarelo
+		                cell.style.fontWeight = "bold";
+		                break;
+		            case "urgente":
+		                cell.style.color = "#DC3545"; // Vermelho
+		                cell.style.fontWeight = "bold";
+		                break;
+		            case "aprovado":
+		                cell.style.color = "#28A745"; // Verde
+		                cell.style.fontWeight = "bold";
+		                break;
+		            case "concluído":
+		                cell.style.color = "#007BFF"; // Azul
+		                cell.style.fontWeight = "bold";
+		                break;
+		            case "cancelado":
+		                cell.style.color = "#6C757D"; // Cinza
+		                cell.style.fontWeight = "bold";
+		                cell.style.textDecoration = "line-through"; // Texto riscado
+		                break;
+		        }
+		    });
+		});
+</script>
 </body>
 </html>

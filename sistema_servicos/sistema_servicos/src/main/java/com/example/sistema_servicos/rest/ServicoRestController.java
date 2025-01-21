@@ -22,7 +22,7 @@ public class ServicoRestController {
 
     @Autowired
     private ClienteRepository clienteRepository;
-
+    
     // Lista todos os serviços
     @GetMapping
     public List<Servico> listarServicos() {
@@ -70,4 +70,6 @@ public class ServicoRestController {
         servicoRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+    
+ 
 }

@@ -20,10 +20,10 @@
 			        <option value="" th:selected="*{descricao == null or descricao == ''}" disabled>Selecione uma opção</option>
 			        <option value="Criação de site (institucional/pessoal)">      </option>
 			        <option value="Criação de site (institucional/pessoal)">Criação de site (institucional/pessoal)</option>
-			        <option value="Desenvolvimento sistema gestão empresarial">Desenvolvimento sistema gestão empresarial</option>
-			        <option value="Desenvolvimento de sistema e-commerce">Desenvolvimento sistema e-commerce</option>
-			        <option value="Atualização de conteúdo do site">Atualização conteúdo do site</option>
-			        <option value="Atualização de conteúdo da estrutura">Atualização conteúdo da estrutura</option>
+			        <option value="Desenvolvimento gestão empresarial">Desenvolvimento sistema gestão empresarial</option>
+			        <option value="Desenvolvimento e-commerce">Desenvolvimento sistema e-commerce</option>
+			        <option value="Atualização conteúdo do site">Atualização conteúdo do site</option>
+			        <option value="Atualização conteúdo da estrutura">Atualização conteúdo da estrutura</option>
 			        <option value="Outro">Outro</option>
 			    </select>
 			</div>
@@ -53,7 +53,7 @@
 			    <!-- Horas Dia -->
 			    <div class="me-3" id="horaDiaDiv" hidden>
 			        <label for="horaDia" class="form-label">Horas Dia:</label >
-			        <input type="number" id="horaDia" name="horaDia" class="form-control" th:field="*{horaDia}" oninput="calcularValorTotal()" onchange="calcularValorTotal()" size="5" />
+			        <input type="number" id="horaDia" name="horaDia" class="form-control" th:field="*{horaDia}" oninput="calcularValorTotal()" onchange="calcularValorTotal()"  />
 			    </div>
 			
 			    <!-- Valor Total Projeto -->
@@ -69,6 +69,7 @@
 				    <label for="status" class="form-label">Status do Serviço:</label>
 				    <select id="status" class="form-select" th:field="*{status}">
 				        <option value="Em Análise" th:selected="*{status == 'Em Análise'}">Em Análise</option>
+				        <option value="Urgente" th:selected="*{status == 'Urgente'}">Urgente</option>
 				        <option value="Aprovado" th:selected="*{status == 'Aprovado'}">Aprovado</option>
 				        <option value="Concluído" th:selected="*{status == 'Concluído'}">Concluído</option>
 				        <option value="Cancelado" th:selected="*{status == 'Cancelado'}">Cancelado</option>
